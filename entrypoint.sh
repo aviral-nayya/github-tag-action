@@ -9,12 +9,14 @@ tag_commit=$(git rev-list -n 1 $tag)
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
 git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
-if [ "$default_semvar_bump" != "none" ]; then
+if [ "$default_semvar_bump" != "none" ] || [ -z "$tag" ]; then
 	if [ "$tag_commit" == "$commit" ]; then
 	    echo "No new commits since previous tag. Skipping..."
 	    exit 0
 	fi
-
+	if [ "$tag" == "latest"]; then
+	    tag=$(git describe --tags `git rev-list --tags --max-count=2` | tail -n 1)
+	fi
 	# if there are none, start tags at 0.0.0
 	if [ -z "$tag" ]
 	then
