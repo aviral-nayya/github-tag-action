@@ -51,9 +51,9 @@ if [ "$default_semvar_bump" != "none" ]; then
 
 	curl -s -X POST $git_refs_url \
 	-H "Authorization: token $GITHUB_TOKEN" \
-	-d '{"ref": "refs/tags/$new", "sha": "$commit"}'
+	-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
 else
 	curl -s -X POST $git_refs_url \
 	-H "Authorization: token $GITHUB_TOKEN" \
-	-d '{"ref": "refs/tags/latest", "sha": "$commit"}'
+	-d '{"ref": "refs/tags/latest", "sha": "'$commit'"}'
 fi
