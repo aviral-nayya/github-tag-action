@@ -48,7 +48,8 @@ if [ "$default_semvar_bump" != "none" ]; then
 	full_name=$GITHUB_REPOSITORY
 
 	echo "$dt: **pushing tag $new to repo $full_name"
-
+	echo "refs: $git_refs_url"
+		
 	curl -s -X POST $git_refs_url \
 	-H "Authorization: token $GITHUB_TOKEN" \
 	-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
