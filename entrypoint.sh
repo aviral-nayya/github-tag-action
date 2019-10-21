@@ -57,7 +57,8 @@ if [ "$default_semvar_bump" != "none" ] || [ -z "$tag" ]; then
 	-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
 fi	
 
-echo "refs: $git_refs_url"
+curl -s -X DELETE "$git_refs_url/tags/latest" \
+ -H "Authorization: token $GITHUB_TOKEN" \
 
 curl -s -X POST $git_refs_url \
  -H "Authorization: token $GITHUB_TOKEN" \
