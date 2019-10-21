@@ -13,7 +13,7 @@ if [ "$tag_commit" == "$commit" ]; then
     echo "No new commits since previous tag. Skipping..."
     exit 0
 fi
-if [ "$tag" == "latest"]; then
+if [ "$tag" == "latest" ]; then
     tag=$(git describe --tags `git rev-list --tags --max-count=2` | tail -n 1)
 fi
 # if there are none, start tags at 0.0.0
