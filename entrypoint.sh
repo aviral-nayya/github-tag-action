@@ -4,6 +4,8 @@
 default_semvar_bump=${DEFAULT_BUMP:-none}
 with_v=${WITH_V:-false}
 # get latest tag
+git checkout master
+git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
 tag_commit=$(git rev-list -n 1 $tag)
 # get current commit hash for tag
