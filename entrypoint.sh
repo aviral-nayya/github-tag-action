@@ -54,14 +54,14 @@ if [ "$new" != "none" ]; then
 	#curl -s -X POST $git_refs_url \
 	#-H "Authorization: token $GITHUB_TOKEN" \
 	#-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
-	git tag $new $commit
+	git tag -a -m "release: ${new}" $new $commit
 fi	
 
 #curl -s -X DELETE "$git_refs_url/tags/latest" \
 # -H "Authorization: token $GITHUB_TOKEN" \
 
-git tag --delete latest
-git tag latest $commit
+#git tag --delete latest
+git tag -a -m "latest release" -f latest $commit
 
 #curl -s -X POST $git_refs_url \
 # -H "Authorization: token $GITHUB_TOKEN" \
