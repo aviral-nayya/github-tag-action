@@ -4,7 +4,7 @@
 default_semvar_bump=${DEFAULT_BUMP:-none}
 with_v=${WITH_V:-false}
 # get latest tag
-tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+tag=$(git tag --sort=-creatordate | head -n 1)
 tag_commit=$(git rev-list -n 1 $tag)
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
@@ -30,6 +30,7 @@ fi
 case "$log" in
     *#major* ) new=$(semver bump major $tag);;
     *#minor* ) new=$(semver bump minor $tag);;
+    *#patch* ) new=$(semver bump patch $tag);;
     * ) new="none";;
 esac
 
@@ -49,16 +50,19 @@ if [ "$new" != "none" ]; then
 	full_name=$GITHUB_REPOSITORY
 
 	echo "$dt: **pushing tag $new to repo $full_name"
-	echo "refs: $git_refs_url"
 		
-	curl -s -X POST $git_refs_url \
-	-H "Authorization: token $GITHUB_TOKEN" \
-	-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
+	#curl -s -X POST $git_refs_url \
+	#-H "Authorization: token $GITHUB_TOKEN" \
+	#-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
+	git tag $new $commit
 fi	
 
-curl -s -X DELETE "$git_refs_url/tags/latest" \
- -H "Authorization: token $GITHUB_TOKEN" \
+#curl -s -X DELETE "$git_refs_url/tags/latest" \
+# -H "Authorization: token $GITHUB_TOKEN" \
 
-curl -s -X POST $git_refs_url \
- -H "Authorization: token $GITHUB_TOKEN" \
- -d '{"ref": "refs/tags/latest", "sha": "'$commit'"}'
+git tag --delete latest
+git tag latest $commit
+
+#curl -s -X POST $git_refs_url \
+# -H "Authorization: token $GITHUB_TOKEN" \
+# -d '{"ref": "refs/tags/latest", "sha": "'$commit'"}'
