@@ -68,3 +68,4 @@ git tag -a -m "latest release" -f latest $commit
 #curl -s -X POST $git_refs_url \
 # -H "Authorization: token $GITHUB_TOKEN" \
 # -d '{"ref": "refs/tags/latest", "sha": "'$commit'"}'
+git push --follow-tag
