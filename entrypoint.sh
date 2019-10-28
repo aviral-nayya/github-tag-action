@@ -65,7 +65,7 @@ fi
 # -H "Authorization: token $GITHUB_TOKEN" \
 
 git push origin :refs/tags/latest
-git tag -fa latest $commit
+git tag -fa -m "latest release" latest $commit
 
 #curl -s -X POST $git_refs_url \
 # -H "Authorization: token $GITHUB_TOKEN" \
