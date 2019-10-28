@@ -62,6 +62,8 @@ Any commit message that includes `#major`, `#minor`, or `#patch` will trigger th
 
 [fsaintjacques/semver-tool](https://github.com/fsaintjacques/semver-tool)
 
+[anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action)
+
 ### Projects using github-tag-action
 
 A list of projects using github-tag-action for reference.

@@ -1,6 +1,7 @@
-name: 'Github Tag Bump'
-description: 'Bump and push git tag on merge'
-author: 'Nick Sjostrom'
+name: 'Github Tag Bump and `latest` tag update'
+description: 'A Github Action to update MAJOR.MINOR.PATCH tag on merge and update "latest" tag.'
+author: 'Wiktor Jurasz'
+credits: 'Nick Sjostrom - forked from his repo'
 runs:
   using: 'docker'
   image: 'Dockerfile'
