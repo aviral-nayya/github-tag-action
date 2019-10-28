@@ -1,6 +1,6 @@
 # github-tag-action
 
-A Github Action to automatically bump and tag master, on merge, with the latest SemVer formatted version.
+A Github Action to automatically bump and tag master, on merge, with the latest SemVer formatted version, and update `latest` tag to point to the latest commit.
 
 [![Build Status](https://github.com/anothrNick/github-tag-action/workflows/Bump%20version/badge.svg)](https://github.com/anothrNick/github-tag-action/workflows/Bump%20version/badge.svg)
 [![Stable Version](https://img.shields.io/github/v/tag/anothrNick/github-tag-action)](https://img.shields.io/github/v/tag/anothrNick/github-tag-action)
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@master
+      uses: wiktorj/github-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -70,8 +70,8 @@ Any commit message that includes `#major`, `#minor`, or `#patch` will trigger th
 
 A list of projects using github-tag-action for reference.
 
-* another/github-tag-action (uses itself to create tags)
+* wiktorj/github-tag-action (uses itself to create tags)
 
-* [anothrNick/json-tree-service](https://github.com/anothrNick/json-tree-service)
+* [kaos](https://github.com/KI-labs/kaos)
+  open source platform for simplifying machine learning deployment https://www.ki-labs.com/kaos
 
-  > Access JSON structure with HTTP path parameters as keys/indices to the JSON.
