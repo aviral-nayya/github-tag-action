@@ -71,4 +71,3 @@ A list of projects using github-tag-action for reference.
 * [kaos](https://github.com/KI-labs/kaos)
   open source platform for simplifying machine learning deployment https://www.ki-labs.com/kaos
 
-
