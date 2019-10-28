@@ -64,8 +64,8 @@ fi
 #curl -s -X DELETE "$git_refs_url/tags/latest" \
 # -H "Authorization: token $GITHUB_TOKEN" \
 
-git tag --delete latest
-git tag -a -m "latest release" -f latest $commit
+git push origin :refs/tags/latest
+git tag -fa latest $commit
 
 #curl -s -X POST $git_refs_url \
 # -H "Authorization: token $GITHUB_TOKEN" \
