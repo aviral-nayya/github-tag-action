@@ -18,7 +18,7 @@ if [ "$tag_commit" == "$commit" ]; then
     exit 0
 fi
 if [ "$tag" == "latest" ]; then
-    tag=$(git describe --tags `git rev-list --tags --max-count=2` | tail -n 1)
+    tag=$(git tag --sort=-creatordate | head -n 2 | tail -n 1)
 fi
 echo ::tag before update: $tag
 # if there are none, start tags at 0.0.0
