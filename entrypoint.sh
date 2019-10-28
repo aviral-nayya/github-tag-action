@@ -36,8 +36,8 @@ case "$log" in
     *#patch* ) new=$(semver bump patch $tag);;
     * ) new="none";;
 esac
-git config user.email ${USER_EMAIL:-""} 
-git config user.name ${USER_NAME:-""}
+git config user.email ${USER_EMAIL:-" "} 
+git config user.name ${USER_NAME:-" "}
 
 if [ "$new" != "none" ]; then
 	# prefix with 'v'
