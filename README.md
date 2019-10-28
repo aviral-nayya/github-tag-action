@@ -40,7 +40,7 @@ jobs:
 
 * **new_tag** - The value of the newly created tag.
 
-> ***Note:*** This action creates a [lightweight tag](https://developer.github.com/v3/git/refs/#create-a-reference).
+> ***Note:*** This action creates a [annotated tag](https://git-scm.com/book/en/v1/Git-Internals-Git-References#Tags).
 
 ### Bumping
 
