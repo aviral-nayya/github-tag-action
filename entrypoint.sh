@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # config
-default_semvar_bump=${DEFAULT_BUMP:-none}
 with_v=${WITH_V:-false}
 # get latest tag
 git checkout master
@@ -37,8 +36,8 @@ case "$log" in
     *#patch* ) new=$(semver bump patch $tag);;
     * ) new="none";;
 esac
-git config user.email "kaos@ki-labs.com"
-git config user.name "kaos"
+git config user.email ${USER_EMAIL:-""} 
+git config user.name ${USER_NAME:-""}
 
 if [ "$new" != "none" ]; then
 	# prefix with 'v'
