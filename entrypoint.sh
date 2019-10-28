@@ -7,7 +7,6 @@ with_v=${WITH_V:-false}
 git checkout master
 git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
-git tag --sort=-creatordate 
 echo ::tag before latest check: $tag
 tag_commit=$(git rev-list -n 1 $tag)
 # get current commit hash for tag
@@ -47,10 +46,7 @@ if [ "$new" != "none" ]; then
 	then
 	    new="v$new"
 	fi
-	echo $new
-
-	# set output
-	echo ::set-output name=new_tag::$new
+	echo ::new tag: $new
 
 	# push new tag ref to github
 	dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
