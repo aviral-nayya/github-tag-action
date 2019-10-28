@@ -34,7 +34,6 @@ jobs:
 **Environment Variables**
 
 * **GITHUB_TOKEN** ***(required)*** - Required for permission to tag the repo.
-* **DEFAULT_BUMP** *(optional)* - Which type of bump to use when none explicitly provided (default: `minor`).
 * **WITH_V** *(optional)* - Tag version with `v` character.
 
 #### Outputs
@@ -45,9 +44,10 @@ jobs:
 
 ### Bumping
 
-**Manual Bumping:** Any commit message that includes `#major`, `#minor`, or `#patch` will trigger the respective version bump. If two or more are present, the highest-ranking one will take precedence.
+With every commit to master `latest` tag is updated to the latest commit in the master branch. 
 
-**Automatic Bumping:** If no `#major`, `#minor` or `#patch` tag is contained in the commit messages, it will bump whichever `DEFAULT_BUMP` is set to (which is `minor` by default).
+Any commit message that includes `#major`, `#minor`, or `#patch` will trigger the respective version bump. If two or more are present, the highest-ranking one will take precedence.
+
 
 > ***Note:*** This action **will not** bump the tag if the `HEAD` commit has already been tagged.
 
@@ -57,9 +57,10 @@ jobs:
 * Commit some changes
 * Either push to master or open a PR
 * On push (or merge) to `master`, the action will:
-  * Get latest tag
-  * Bump tag with minor version unless any commit message contains `#major` or `#patch`
-  * Pushes tag to github
+  * Get latest tag (different than `latest`)
+  * Bump the tag **if** commit message contains one of the: `#major`, `#minor` or `#patch` 
+  * Updates `latest` tag to point to the latest commit on the master branch
+  * Pushes tags updates to github
 
 ### Credits
 

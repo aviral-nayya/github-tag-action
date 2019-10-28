@@ -60,13 +60,7 @@ if [ "$new" != "none" ]; then
 	git tag -a -m "release: ${new}" $new $commit
 fi	
 
-#curl -s -X DELETE "$git_refs_url/tags/latest" \
-# -H "Authorization: token $GITHUB_TOKEN" \
 
 git push origin :refs/tags/latest
 git tag -fa -m "latest release" latest $commit
-
-#curl -s -X POST $git_refs_url \
-# -H "Authorization: token $GITHUB_TOKEN" \
-# -d '{"ref": "refs/tags/latest", "sha": "'$commit'"}'
 git push --follow-tag
