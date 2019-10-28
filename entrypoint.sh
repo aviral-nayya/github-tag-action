@@ -7,6 +7,7 @@ with_v=${WITH_V:-false}
 git checkout master
 git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
+echo ::tag before latest check: $tag
 tag_commit=$(git rev-list -n 1 $tag)
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
@@ -18,6 +19,7 @@ fi
 if [ "$tag" == "latest" ]; then
     tag=$(git describe --tags `git rev-list --tags --max-count=2` | tail -n 1)
 fi
+echo ::tag before update: $tag
 # if there are none, start tags at 0.0.0
 if [ -z "$tag" ]
 then
