@@ -1,6 +1,6 @@
 # GitHub Tag Action
 
-A Github Action to automatically bump and tag the branch passed by env variable on merge, and update `latest` tag to point to the latest commit based on the default bump.
+A Github Action to automatically bump and tag the branch passed by env variable and update `latest` tag to point to the latest commit based on the default bump.
 
 ### Usage
 
@@ -21,6 +21,21 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
         DEFAULT_BUMP: minor
+```
+
+> ***Note:*** This workflow should be on a push or merge.
+
+#### Semantic Versioning
+
+Versioning will follow [https://semver.org/](https://semver.org/):
+
+```
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+MAJOR version when you make incompatible API changes,
+MINOR version when you add functionality in a backwards compatible manner, and
+PATCH version when you make backwards compatible bug fixes.
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 ```
 
 #### Options
