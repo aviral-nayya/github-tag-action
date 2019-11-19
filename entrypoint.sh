@@ -25,9 +25,9 @@ if [ "$tag" == "latest" ]; then
 fi
 
 echo ::tag before update: $tag
-# if there are none, start tags at 0.0.0
+# if there are none or it's still latest, start tags at 0.0.0
 
-if [ -z "$tag" ]; then
+if [ -z "$tag" ] || [ "$tag" == "latest" ]; then
     tag="0.0.0"
 fi
 
