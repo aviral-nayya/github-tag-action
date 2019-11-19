@@ -31,7 +31,7 @@ if [ -z "$tag" ]; then
     tag="0.0.0"
 fi
 
-new=$(semver bump $DEFAULT_BUMP $tag);;
+new=$(semver bump $DEFAULT_BUMP $tag);
 
 git config user.email "actions@github.com" 
 git config user.name "GitHub Merge Action"
