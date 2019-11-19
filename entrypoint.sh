@@ -37,8 +37,8 @@ git config user.email "actions@github.com"
 git config user.name "GitHub Merge Action"
 
 if [ "$new" != "none" ]; then
-	# prefix with 'v'
-	if $with_v; then
+    # prefix with 'v'
+    if $with_v; then
         new="v$new"
     fi
     echo ::new tag: $new
