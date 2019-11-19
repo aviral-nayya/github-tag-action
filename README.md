@@ -25,17 +25,6 @@ jobs:
 
 > ***Note:*** This workflow should be on a push or merge.
 
-#### Semantic Versioning
-
-Versioning will follow [https://semver.org/](https://semver.org/):
-
-Given a version number MAJOR.MINOR.PATCH, increment the:
-
-MAJOR version when you make incompatible API changes,
-MINOR version when you add functionality in a backwards compatible manner, and
-PATCH version when you make backwards compatible bug fixes.
-Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
-
 #### Options
 
 **Environment Variables**
@@ -50,6 +39,17 @@ Additional labels for pre-release and build metadata are available as extensions
 * **new_tag** - The value of the newly created tag.
 
 > ***Note:*** This action creates a [annotated tag](https://git-scm.com/book/en/v1/Git-Internals-Git-References#Tags).
+
+### Semantic Versioning
+
+Versioning will follow [https://semver.org/](https://semver.org/):
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+MAJOR version when you make incompatible API changes,
+MINOR version when you add functionality in a backwards compatible manner, and
+PATCH version when you make backwards compatible bug fixes.
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
 ### Bumping
 
