@@ -5,7 +5,7 @@ A Github Action to automatically bump and tag the branch passed by env variable 
 ### Usage
 
 ```Dockerfile
-name: Bump version
+name: bump and tag branch
 on:
   push:
     branches:
