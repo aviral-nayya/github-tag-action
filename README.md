@@ -1,6 +1,6 @@
-# github-tag-action
+# GitHub Tag Action
 
-A Github Action to automatically bump and tag any release branch on merge, and update `latest` tag to point to the latest commit based on the default bump.
+A Github Action to automatically bump and tag the branch passed by env variable on merge, and update `latest` tag to point to the latest commit based on the default bump.
 
 ### Usage
 
