@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # config
-default_semvar_bump=${DEFAULT_BUMP:-minor}
+default_semvar_bump=${BUMP:-minor}
 with_v=${WITH_V:-true}
 
 # get latest tag
@@ -31,14 +31,14 @@ if [ -z "$tag" ]; then
     tag="0.0.0"
 fi
 
-new=$(semver bump $DEFAULT_BUMP $tag);
+new=$(semver bump $default_semvar_bump $tag);
 
 git config user.email "actions@github.com" 
 git config user.name "GitHub Merge Action"
 
 if [ "$new" != "none" ]; then
-    # prefix with 'v'
-    if $with_v then
+	# prefix with 'v'
+	if $with_v; then
         new="v$new"
     fi
     echo ::new tag: $new
