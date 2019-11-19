@@ -1,6 +1,6 @@
 # github-tag-action
 
-A Github Action to automatically bump and tag any release branch on merge, and update `latest` tag to point to the latest commit.
+A Github Action to automatically bump and tag any release branch on merge, and update `latest` tag to point to the latest commit based on the default bump.
 
 ### Usage
 
@@ -20,6 +20,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
+        DEFAULT_BUMP: minor
 ```
 
 #### Options
@@ -28,7 +29,8 @@ jobs:
 
 * **GITHUB_TOKEN** ***(required)*** - Required for permission to tag the repo.
 * **BRANCH** ***(required)*** - Branch name.
-* **WITH_V** *(optional)* - Tag version with `v` character.
+* **DEFAULT_BUMP** ***(required)*** - Branch name.
+* **WITH_V** *(optional)* - Tag version with `v` character. Defaults to true.
 
 #### Outputs
 
