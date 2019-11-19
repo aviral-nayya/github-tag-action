@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Bump version and push tag
-      uses: wiktorj/github-tag-action@master
+      uses: kimgault/github-tag-action@v1.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
