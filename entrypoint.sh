@@ -24,10 +24,10 @@ if [ "$tag" == "latest" ]; then
     tag=$(git tag --sort=-creatordate | head -n 2 | tail -n 1)
 fi
 
-echo ::tag before update: $tag
-# if there are none or it's still latest, start tags at 0.0.0
-
-if [ -z "$tag" ] || [ "$tag" == "latest" ]; then
+echo "tag before update: $tag"
+# if there are none or it's still latest or v, start tags at 0.0.0
+if [ -z "$tag" ] || [ "$tag" == "latest" ] || [ "$tag" == "v" ]; then
+    echo "Tag does not mmatch semver scheme X.Y.Z(-PRERELEASE)(+BUILD). Changing to 0.0.0'"
     tag="0.0.0"
 fi
 
@@ -41,7 +41,7 @@ if [ "$new" != "none" ]; then
     if $with_v; then
         new="v$new"
     fi
-    echo ::new tag: $new
+    echo "new tag: $new"
 
     # push new tag ref to github
     dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
