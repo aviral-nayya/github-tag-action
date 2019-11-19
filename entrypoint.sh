@@ -1,43 +1,40 @@
 #!/bin/bash
 
 # config
-with_v=${WITH_V:-false}
+default_semvar_bump=${DEFAULT_BUMP:-minor}
+with_v=${WITH_V:-true}
+
 # get latest tag
 git checkout $BRANCH
 git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
 echo ::tag before latest check: $tag
 tag_commit=$(git rev-list -n 1 $tag)
+
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
 git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
+
 if [ "$tag_commit" == "$commit" ]; then
     echo "No new commits since previous tag. Skipping..."
     exit 0
 fi
+
 if [ "$tag" == "latest" ]; then
     tag=$(git tag --sort=-creatordate | head -n 2 | tail -n 1)
 fi
+
 echo ::tag before update: $tag
 # if there are none, start tags at 0.0.0
-if [ -z "$tag" ]
-then
-    log=$(git log --pretty=oneline)
+
+if [ -z "$tag" ] then
     tag=0.0.0
-else
-    log=$(git log $tag..HEAD --pretty=oneline)
 fi
-echo ::commit message: $log
-# get commit logs and determine home to bump the version
-# supports #major, #minor, #patch (anything else will be 'minor')
-case "$log" in
-    *#major* ) new=$(semver bump major $tag);;
-    *#minor* ) new=$(semver bump minor $tag);;
-    *#patch* ) new=$(semver bump patch $tag);;
-    * ) new="none";;
-esac
-git config user.email "email" 
-git config user.name "user"
+
+new=$(semver bump $DEFAULT_BUMP $tag);;
+
+git config user.email "actions@github.com" 
+git config user.name "GitHub Merge Action"
 
 if [ "$new" != "none" ]; then
 	# prefix with 'v'
