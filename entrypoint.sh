@@ -8,7 +8,7 @@ with_v=${WITH_V:-true}
 git checkout $BRANCH
 git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
-echo ::tag before latest check: $tag
+echo "tag before latest check: $tag"
 tag_commit=$(git rev-list -n 1 $tag)
 
 # get current commit hash for tag
