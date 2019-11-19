@@ -1,6 +1,6 @@
 # GitHub Tag Action
 
-A Github Action to automatically bump and tag the branch passed by env variable and update `latest` tag to point to the latest commit based on the default bump.
+A Github Action to automatically bump and tag the branch passed by env variable and update `latest` tag to point to the latest commit based on the passed in bump type.
 
 ### Usage
 
@@ -20,7 +20,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
-        DEFAULT_BUMP: minor
+        BUMP: major
 ```
 
 > ***Note:*** This workflow should be on a push or merge.
@@ -31,7 +31,7 @@ jobs:
 
 * **GITHUB_TOKEN** ***(required)*** - Required for permission to tag the repo.
 * **BRANCH** ***(required)*** - Branch name.
-* **DEFAULT_BUMP** ***(required)*** - Branch name.
+* **BUMP** *(optional)* - Branch name. Defaults to minor.
 * **WITH_V** *(optional)* - Tag version with `v` character. Defaults to true.
 
 #### Outputs
