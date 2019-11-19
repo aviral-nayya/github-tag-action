@@ -37,23 +37,22 @@ git config user.email "actions@github.com"
 git config user.name "GitHub Merge Action"
 
 if [ "$new" != "none" ]; then
-	# prefix with 'v'
-	if $with_v
-	then
-	    new="v$new"
-	fi
-	echo ::new tag: $new
+    # prefix with 'v'
+    if $with_v then
+        new="v$new"
+    fi
+    echo ::new tag: $new
 
-	# push new tag ref to github
-	dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
-	full_name=$GITHUB_REPOSITORY
+    # push new tag ref to github
+    dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
+    full_name=$GITHUB_REPOSITORY
 
-	echo "$dt: **pushing tag $new to repo $full_name"
+    echo "$dt: **pushing tag $new to repo $full_name"
 		
-	#curl -s -X POST $git_refs_url \
-	#-H "Authorization: token $GITHUB_TOKEN" \
-	#-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
-	git tag -a -m "release: ${new}" $new $commit
+    #curl -s -X POST $git_refs_url \
+    #-H "Authorization: token $GITHUB_TOKEN" \
+    #-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
+    git tag -a -m "release: ${new}" $new $commit
 fi	
 
 
