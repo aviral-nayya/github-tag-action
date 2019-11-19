@@ -55,9 +55,7 @@ Additional labels for pre-release and build metadata are available as extensions
 
 With every commit to master `latest` tag is updated to the latest commit in the master branch. 
 
-Any commit message that includes `#major`, `#minor`, or `#patch` will trigger the respective version bump. If two or more are present, the highest-ranking one will take precedence.
-
-> ***Note:*** This action **will not** bump the tag if the `HEAD` commit has already been tagged.
+It will also bump the tag with the DEFAULT_BUMP increment, but it **will not** bump the tag if the `HEAD` commit has already been tagged.
 
 ### Workflow
 
@@ -67,7 +65,7 @@ Any commit message that includes `#major`, `#minor`, or `#patch` will trigger th
 * Either push to master or open a PR
 * On push (or merge) to `master`, the action will:
   * Get latest tag (different than `latest`)
-  * Bump the tag **if** commit message contains one of the: `#major`, `#minor` or `#patch` 
+  * Bump the tag **if** the `HEAD` commit has not been tagged
   * Updates `latest` tag to point to the latest commit on the master branch
   * Pushes tags updates to github
 
