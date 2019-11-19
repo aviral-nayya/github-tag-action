@@ -1,10 +1,6 @@
 # github-tag-action
 
-A Github Action to automatically bump and tag master, on merge, with the latest SemVer formatted version, and update `latest` tag to point to the latest commit.
-
-[![Build Status](https://github.com/wiktorj/github-tag-action/workflows/Bump%20version/badge.svg)](https://github.com/wiktorj/github-tag-action/workflows/Bump%20version/badge.svg)
-[![Stable Version](https://img.shields.io/github/v/tag/wiktorj/github-tag-action)](https://img.shields.io/github/v/tag/wiktorj/github-tag-action)
-[![Latest Release](https://img.shields.io/github/v/release/wiktorj/github-tag-action?color=%233D9970)](https://img.shields.io/github/v/release/wiktorj/github-tag-action?color=%233D9970)
+A Github Action to automatically bump and tag any release branch on merge, and update `latest` tag to point to the latest commit.
 
 ### Usage
 
@@ -23,6 +19,7 @@ jobs:
       uses: wiktorj/github-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: master
 ```
 
 #### Options
@@ -30,6 +27,7 @@ jobs:
 **Environment Variables**
 
 * **GITHUB_TOKEN** ***(required)*** - Required for permission to tag the repo.
+* **BRANCH** ***(required)*** - Branch name.
 * **WITH_V** *(optional)* - Tag version with `v` character.
 
 #### Outputs
@@ -44,13 +42,13 @@ With every commit to master `latest` tag is updated to the latest commit in the 
 
 Any commit message that includes `#major`, `#minor`, or `#patch` will trigger the respective version bump. If two or more are present, the highest-ranking one will take precedence.
 
-
 > ***Note:*** This action **will not** bump the tag if the `HEAD` commit has already been tagged.
 
 ### Workflow
 
 * Add this action to your repo
 * Commit some changes
+* Decide what branch you want to compare, example is master.
 * Either push to master or open a PR
 * On push (or merge) to `master`, the action will:
   * Get latest tag (different than `latest`)
@@ -60,16 +58,7 @@ Any commit message that includes `#major`, `#minor`, or `#patch` will trigger th
 
 ### Credits
 
-[fsaintjacques/semver-tool](https://github.com/fsaintjacques/semver-tool)
+Forked from:
+[WiktorJ/github-tag-action](https://github.com/WiktorJ/github-tag-action)
 
-[anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action)
-
-### Projects using github-tag-action
-
-A list of projects using github-tag-action for reference.
-
-* wiktorj/github-tag-action (uses itself to create tags)
-
-* [kaos](https://github.com/KI-labs/kaos)
-  open source platform for simplifying machine learning deployment https://www.ki-labs.com/kaos
 
