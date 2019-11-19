@@ -3,7 +3,7 @@
 # config
 with_v=${WITH_V:-false}
 # get latest tag
-git checkout master
+git checkout $BRANCH
 git pull
 tag=$(git tag --sort=-creatordate | head -n 1)
 echo ::tag before latest check: $tag
