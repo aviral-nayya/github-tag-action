@@ -1,4 +1,4 @@
-name: 'Github Tag Bump'
+name: 'Github Any Branch Tag Bump'
 description: 'A Github Action to update chosen branch with MAJOR.MINOR.PATCH tag on merge.'
 author: 'Kim Gault'
 credits: 'Wiktor Jurasz - forked from their repo'
