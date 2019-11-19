@@ -28,7 +28,7 @@ echo ::tag before update: $tag
 # if there are none, start tags at 0.0.0
 
 if [ -z "$tag" ] then
-    tag=0.0.0
+    tag="0.0.0"
 fi
 
 new=$(semver bump $DEFAULT_BUMP $tag);;
