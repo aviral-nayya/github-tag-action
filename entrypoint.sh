@@ -52,9 +52,12 @@ if [ "$new" != "none" ]; then
     git tag -a -m "release: ${new}" $new $commit
 fi	
 
-echo "git push origin :refs/tags/latest"
-git push origin :refs/tags/latest
-echo "git tag -fa -m "latest release" latest $commit"
-git tag -fa -m "latest release" latest $commit
-echo "git push --follow-tag"
-git push --follow-tag
+# POST a new ref to repo via Github API
+curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
+-H "Authorization: token $GITHUB_TOKEN" \
+-d @- << EOF
+{
+  "ref": "refs/tags/$new",
+  "sha": "$commit"
+}
+EOF
