@@ -35,7 +35,6 @@ new=$(semver bump $default_semvar_bump $tag);
 
 git config user.email "actions@github.com" 
 git config user.name "GitHub Merge Action"
-git config github.token $GITHUB_TOKEN
 
 if [ "$new" != "none" ]; then
     # prefix with 'v'
@@ -50,10 +49,10 @@ if [ "$new" != "none" ]; then
 
     echo "$dt: **pushing tag $new to repo $full_name"
 		
-    #curl -s -X POST $git_refs_url \
-    #-H "Authorization: token $GITHUB_TOKEN" \
-    #-d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
-    git tag -a -m "release: ${new}" $new $commit
+    curl -s -X POST $git_refs_url \
+    -H "Authorization: token $GITHUB_TOKEN" \
+    -d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
+    # git tag -a -m "release: ${new}" $new $commit
 fi	
 
 
