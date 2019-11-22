@@ -54,7 +54,7 @@ fi
 
 # POST a new ref to repo via Github API
 curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
--H "Authorization: token $GITHUB_TOKEN" \
+-H "Authorization: token $GITHUB_TOKEN" https://api.github.com \
 -d @- << EOF
 {
   "ref": "refs/tags/$new",
