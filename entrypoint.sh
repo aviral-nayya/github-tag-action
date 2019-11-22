@@ -12,10 +12,6 @@ with_v=${WITH_V:-true}
 
 repo_fullname=$(jq -r ".repository.full_name" "$GITHUB_EVENT_PATH")
 
-uri=https://api.github.com
-api_header="Accept: application/vnd.github.v3+json"
-auth_header="Authorization: token $GITHUB_TOKEN"
-
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$repo_fullname.git
 git config --global user.email "actions@github.com"
 git config --global user.name "GitHub Merge Action"
