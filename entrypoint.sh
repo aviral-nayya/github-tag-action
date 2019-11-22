@@ -35,6 +35,7 @@ new=$(semver bump $default_semvar_bump $tag);
 
 git config user.email "actions@github.com" 
 git config user.name "GitHub Merge Action"
+git config github.token $GITHUB_TOKEN
 
 if [ "$new" != "none" ]; then
     # prefix with 'v'
