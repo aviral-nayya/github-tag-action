@@ -1,19 +1,37 @@
 #!/bin/bash
 
-# config
+set -e
+
+if [[ -z "$GITHUB_TOKEN" ]]; then
+	echo "Set the GITHUB_TOKEN env variable."
+	exit 1
+fi
+
 default_semvar_bump=${BUMP:-minor}
 with_v=${WITH_V:-true}
 
-# get latest tag
+repo_fullname=$(jq -r ".repository.full_name" "$GITHUB_EVENT_PATH")
+
+uri=https://api.github.com
+api_header="Accept: application/vnd.github.v3+json"
+auth_header="Authorization: token $GITHUB_TOKEN"
+
+git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$repo_fullname.git
+git config --global user.email "actions@github.com"
+git config --global user.name "GitHub Merge Action"
+
+set -o xtrace
+
+git fetch origin $BRANCH
 git checkout $BRANCH
-git pull
+
+# get latest tag
 tag=$(git tag --sort=-creatordate | head -n 1)
 echo "tag before latest check: $tag"
 tag_commit=$(git rev-list -n 1 $tag)
 
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
-git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
 
 if [ "$tag_commit" == "$commit" ]; then
     echo "No new commits since previous tag. Skipping..."
@@ -33,9 +51,6 @@ fi
 
 new=$(semver bump $default_semvar_bump $tag);
 
-git config user.email "actions@github.com" 
-git config user.name "GitHub Merge Action"
-
 if [ "$new" != "none" ]; then
     # prefix with 'v'
     if $with_v; then
@@ -50,14 +65,8 @@ if [ "$new" != "none" ]; then
     echo "$dt: **pushing tag $new to repo $full_name"
 
     git tag -a -m "release: ${new}" $new $commit
-fi	
+fi
 
-# POST a new ref to repo via Github API
-curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
--H "Authorization: token $GITHUB_TOKEN" https://api.github.com \
--d @- << EOF
-{
-  "ref": "refs/tags/$new",
-  "sha": "$commit"
-}
-EOF
+git push origin :refs/tags/latest
+git tag -fa -m "latest release" latest $commit
+git push --follow-tag
