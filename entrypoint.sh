@@ -49,9 +49,7 @@ if [ "$new" != "none" ]; then
 
     echo "$dt: **pushing tag $new to repo $full_name"
 
-    curl -s -X POST $git_refs_url \
-    -H "Authorization: token $GITHUB_TOKEN" \
-    -d '{"ref": "refs/tags/'$new'", "sha": "'$commit'"}'
+    git tag -a -m "release: ${new}" $new $commit
 fi	
 
 echo "git push origin :refs/tags/latest"
