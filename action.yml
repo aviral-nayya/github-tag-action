@@ -1,7 +1,7 @@
-name: 'Github Any Branch Tag Bump'
+name: 'Semantic version bump per branch and tag'
 description: 'A Github Action to update chosen branch with MAJOR.MINOR.PATCH tag on merge.'
-author: 'Kim Gault'
-credits: 'Wiktor Jurasz - forked from their repo'
+author: 'Instrument'
+credits: 'Kim Gault - forked from their repo'
 runs:
   using: 'docker'
   image: 'Dockerfile'
