@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Bump version and push tag
-      uses: kimgault/github-tag-action@v1.0
+      uses: Instrument/github-tag-action@v1.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
@@ -72,6 +72,6 @@ It will also bump the tag with the DEFAULT_BUMP increment, but it **will not** b
 ### Credits
 
 Forked from:
-[WiktorJ/github-tag-action](https://github.com/WiktorJ/github-tag-action)
+[kimgault/github-tag-action](https://github.com/kimgault/github-tag-action)
 
 
