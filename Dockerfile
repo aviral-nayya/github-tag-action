@@ -9,13 +9,9 @@ COPY ./contrib/semver ./contrib/semver
 RUN install ./contrib/semver /usr/local/bin
 COPY entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache git
-RUN apk update && apk add bash curl jq
-
-# Change the ownership of files in /github/workspace
-RUN addgroup -g 1000 mygroup && \
-    adduser -D -u 1000 -G mygroup myuser && \
-    chown -R myuser:mygroup /github/workspace
+RUN apk add --no-cache git bash curl jq && \
+    addgroup -g 1000 mygroup && \
+    adduser -D -u 1000 -G mygroup myuser
 
 USER myuser
 
