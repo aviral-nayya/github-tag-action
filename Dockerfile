@@ -11,9 +11,10 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN apk add --no-cache git bash curl jq && \
     addgroup -g 1000 mygroup && \
-    adduser -D -u 1000 -G mygroup myuser && \
-    git config --global --add safe.directory /github/workspace
+    adduser -D -u 1000 -G mygroup myuser
 
 USER myuser
+
+RUN git config --global --add safe.directory /github/workspace
 
 ENTRYPOINT ["/entrypoint.sh"]
