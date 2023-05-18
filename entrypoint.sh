@@ -64,6 +64,6 @@ if [ "$new" != "none" ]; then
     git tag -a -m "release: ${new}" $new $commit
 fi
 
-git push origin :refs/tags/latest
+git push --no-verify origin :refs/tags/latest
 git tag -fa -m "latest release" latest $commit
-git push --follow-tag
+git push --no-verify --follow-tag
