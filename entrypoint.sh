@@ -15,6 +15,7 @@ repo_fullname=$(jq -r ".repository.full_name" "$GITHUB_EVENT_PATH")
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$repo_fullname.git
 git config --global user.email "actions@github.com"
 git config --global user.name "GitHub Merge Action"
+git config --global --add safe.directory /github/workspace
 
 set -o xtrace
 
