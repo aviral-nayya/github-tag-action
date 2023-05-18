@@ -8,6 +8,7 @@ COPY ./contrib/semver ./contrib/semver
 RUN install ./contrib/semver /usr/local/bin
 COPY entrypoint.sh /entrypoint.sh
 
+RUN git config --global --add safe.directory /github/workspace
 RUN apk update && apk add bash git curl jq
 
 ENTRYPOINT ["/entrypoint.sh"]
