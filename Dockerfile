@@ -1,3 +1,4 @@
+FROM alpine
 
 LABEL "repository"="https://github.com/WiktorJ/github-tag-action"
 LABEL "homepage"="https://github.com/WiktorJ/github-tag-action"
