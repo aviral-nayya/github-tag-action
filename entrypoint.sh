@@ -28,7 +28,7 @@ git checkout $BRANCH
 # get latest tag
 tag=$(git tag --sort=-creatordate | head -n 1)
 echo "tag before latest check: $tag"
-tag_commit=$(git rev-list -n 1 $tag)
+tag_commit=$(git rev-list -n 1 --tags $tag)
 
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
