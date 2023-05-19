@@ -12,7 +12,7 @@ with_v=${WITH_V:-true}
 
 repo_fullname=$(jq -r ".repository.full_name" "$GITHUB_EVENT_PATH")
 
-chown -R myuser:mygroup /github/workspace
+sudo chown -R /github/workspace
 git config --global --add safe.directory /github/workspace
 
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$repo_fullname.git
