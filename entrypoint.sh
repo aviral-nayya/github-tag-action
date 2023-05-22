@@ -33,7 +33,7 @@ tag_commit=$(git rev-list -n 1 --tags $tag)
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
 
-if [ "$tag_commit" == "$commit" ]; then
+if [ "$tag_commit" == "$commit" && "$DRY_RUN" != 1 ]; then
     echo "No new commits since previous tag. Skipping..."
     exit 0
 fi
