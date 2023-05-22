@@ -51,22 +51,26 @@ fi
 
 new=$(semver bump $default_semvar_bump $tag);
 
-if [ "$new" != "none" ]; then
+if [ "$new" != "none"]; then
     # prefix with 'v'
     if $with_v; then
         new="v$new"
     fi
     echo "new tag: $new"
+    echo "new_tag=$new" >> $GITHUB_OUTPUT
+    if [ "$DRY_RUN" != 1 ]; then
+        # push new tag ref to github
+        dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
+        full_name=$GITHUB_REPOSITORY
 
-    # push new tag ref to github
-    dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
-    full_name=$GITHUB_REPOSITORY
+        echo "$dt: **pushing tag $new to repo $full_name"
 
-    echo "$dt: **pushing tag $new to repo $full_name"
-
-    git tag -a -m "release: ${new}" $new $commit
+        git tag -a -m "release: ${new}" $new $commit
+    fi
 fi
 
-git push --no-verify origin :refs/tags/latest
-git tag -fa -m "latest release" latest $commit
-git push --no-verify --follow-tag
+if [ "$DRY_RUN" != 1 ]; then
+    git push --no-verify origin :refs/tags/latest
+    git tag -fa -m "latest release" latest $commit
+    git push --no-verify --follow-tag
+fi
