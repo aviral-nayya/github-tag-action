@@ -51,7 +51,7 @@ fi
 
 new=$(semver bump $default_semvar_bump $tag);
 
-if [ "$new" != "none"]; then
+if [ "$new" != "none" ]; then
     # prefix with 'v'
     if $with_v; then
         new="v$new"
