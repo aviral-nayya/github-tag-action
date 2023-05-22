@@ -9,7 +9,7 @@ if [ -z "$GITHUB_TOKEN" ]; then
 	exit 1
 fi
 
-default_semvar_bump=${BUMP:-minor}
+default_semvar_bump=${BUMP:-none}
 with_v=${WITH_V:-true}
 
 repo_fullname=$(jq -r ".repository.full_name" "$GITHUB_EVENT_PATH")
@@ -35,6 +35,11 @@ commit=$(git rev-parse HEAD)
 
 if [ "$tag_commit" == "$commit" && "$DRY_RUN" != 1 ]; then
     echo "No new commits since previous tag. Skipping..."
+    exit 0
+fi
+
+if [ "$BUMP" == "none" ]; then
+    echo "Bump type is none, no increment required. Skipping..."
     exit 0
 fi
 
